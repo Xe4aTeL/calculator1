@@ -1,23 +1,21 @@
-CC = g++
-CCFLAGS = -c -Wall
+CC=g++-11
+CCFLAGS=-c -Wall
 
-LIBSOURCES = calculator.cpp
-LIBOBJECTS = $(LIBSOURCES:.cpp=.o)
+LIBSOURCES=calculator.cpp
+LIBOBJECTS=$(LIBSOURCES:.cpp=.o)
 
 MAIN=main.cpp
 MAINOBJECT=$(MAIN:.cpp=.o)
 
 STATICLIB=libloader.a
 
-TARGET = Lab4
+TARGET=Lab4
 
 all:
-	$(CC) $(CFLAGS) $(MAIN) $(LIBSOURCES)
-	$(CC) $(MAINOBJECT) $(LIBOBJECTS) -o $(TARGET)
-
-static:
+	$(CC) $(CCFLAGS) $(MAIN) $(LIBSOURCES)
 	ar rcs $(STATICLIB) $(LIBOBJECTS)
-	$(CC) $(MAINOBJECT) -L. -lloader -o $(EXECUTABLE)
+	$(CC) $(MAINOBJECT) -L. -lloader -o $(TARGET)
+	rm $(LIBOBJECTS) $(MAINOBJECT)
 
 clean:
-	rm $(LIBOBJECTS) $(MAINOBJECT) $(TARGET) $(STATICLIB)
+	-rm $(LIBOBJECTS) $(MAINOBJECT) $(TARGET) $(STATICLIB)
